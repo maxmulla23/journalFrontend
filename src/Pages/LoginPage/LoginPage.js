@@ -1,9 +1,37 @@
 
 import { UserCircleIcon } from '@heroicons/react/24/solid'
-import React from 'react'
+import React, { useState } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+ import { useAuth } from '../../Context/useAuth'
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+
+
 
 const LoginPage = () => {
- 
+ const [username, setUsername] = useState()
+ const [password, setPassword] = useState()
+
+ const handleLogin = async (e) => {
+  e.preventDefault()
+  try {
+    const res = await axios.post("http://localhost:5103/api/account/login", {
+      username: username,
+      password: password,
+    })
+    if(res.status == 200) {
+      console.log(res);
+      
+      localStorage.setItem("token", res.data.token)
+      toast.success("User is logged in");
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("login failed!try again")
+  }
+ }
   return (
     <div className="relative h-screen overflow-hidden bg-gray-100 dark:bg--100 ">
     <div className="flex justify-center items-center mt-10">
@@ -14,7 +42,7 @@ const LoginPage = () => {
     </h2>
       <div className='flex justify-center items-center'>
       <div className="w-full max-w-xs">
-     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleLogin} >
        <div className="mb-4">
          <label className="block text-gray-700 text-sm font-bold mb-2">
            Username
@@ -24,7 +52,8 @@ const LoginPage = () => {
             id="username"
             type="text"
             placeholder='username'
-            
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             />
       </div>
 <div className="mb-6">
@@ -36,14 +65,15 @@ const LoginPage = () => {
     id="password"
     type='password'
     placeholder="Enter Password"
-    
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
     />
   
 </div>
 <div className="flex items-center justify-between">
   <button 
     className="bg-pink-900 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-    type="button"
+    type="submit"
     
     >
     Sign In
