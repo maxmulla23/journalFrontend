@@ -1,32 +1,36 @@
-
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
- import { useAuth } from '../../Context/useAuth'
-import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
 
 
 
 const LoginPage = () => {
  const [username, setUsername] = useState()
  const [password, setPassword] = useState()
+ const navigate = useNavigate()
 
  const handleLogin = async (e) => {
   e.preventDefault()
   try {
-    const res = await axios.post("http://localhost:5103/api/account/login", {
-      username: username,
-      password: password,
+    const response = await axios.post("http://localhost:5103/api/account/login", {
+     username,
+     password,
     })
-    if(res.status == 200) {
-      console.log(res);
+    const data = response.data
+    
+      console.log(data);
       
-      localStorage.setItem("token", res.data.token)
+      localStorage.setItem("token", data.token)
+      localStorage.setItem("username", data.userName)
+      localStorage.setItem("Email", data.email)
+      
       toast.success("User is logged in");
-    }
+      
+      navigate("/profile")
+
   } catch (error) {
     console.log(error);
     toast.error("login failed!try again")
