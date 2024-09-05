@@ -30,7 +30,7 @@ const ProfileCard = () => {
             <UserCircleIcon className='h-44 w-auto md:h-22' />
         </figure>
              <div className='card-body items-center text-center'>
-             <h2 className='card-title text-3xl text-gray-900 text-bold'>{data.username}</h2>
+             <h2 className='card-title text-3xl text-gray-900 text-bold uppercase'>{data.username}</h2>
              <p className='text-xl text-gray-900'>{data.email}</p>
          </div> 
     </div>
