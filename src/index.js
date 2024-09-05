@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { ToastContainer} from 'react-toastify';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import ProfilePage from './Pages/ProfilePage/ProfilePage';
 import SignUp from './Pages/SignUp/SignUp';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const router = createBrowserRouter([
@@ -30,14 +31,11 @@ const router = createBrowserRouter([
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+  <React.StrictMode>
       <RouterProvider router={router} />
       <ToastContainer />
-    </React.StrictMode>
+      </React.StrictMode>
     
-    // <ThemeProvider >
-    //   <App />
-    // </ThemeProvider>
      
   
 );
