@@ -1,6 +1,34 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const CreateJournal = () => {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const token = localStorage.getItem("token")
+      const response = await axios.post("http://localhost:5103/api/Journal",
+        { title, content },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
+      )
+      console.log(response);
+      
+      toast.success("Journal added succesfully")
+      setTitle('')
+      setContent('')
+    } catch (error) {
+      console.log(error);
+      toast.error("failed!!")
+    }
+  }
   return (
     <div>
         {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -8,16 +36,25 @@ const CreateJournal = () => {
 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
   <div className="modal-box bg-white">
     <h3 className="font-bold text-gray-900 text-lg">Talk to me!</h3>
-    <form>
+    <form onSubmit={handleSubmit}>
     <input 
         type='text'
         id='title'
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         placeholder='title...'
         className='mb-3 mt-3 bg-white border border-gray-700 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
         />
-        <textarea className="textarea textarea-bordered bg-white border-gray-700 w-full" placeholder="Enter Content here ...." />
+        <textarea
+        id='content'
+        value={content}
+        onChange={(e) => setContent(e.target.value)}  
+        className="textarea textarea-bordered bg-white border-gray-700 w-full" 
+        placeholder="Enter Content here ...." />
 
-        {/* <button>Post</button>  */}
+        <button
+        type='submit' 
+        className="btn btn-ghost bg-pink-50 text-black">Add</button>
     </form>
     
     <div className="modal-action">

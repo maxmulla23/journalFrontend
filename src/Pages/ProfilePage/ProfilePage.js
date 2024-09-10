@@ -6,7 +6,7 @@ import Journalscard from '../../Components/Alljournals/Journalscard'
 
 const ProfilePage = () => {
   return (
-    <div className=' bg-gray-200 relative h-screen overflow-hidden'>
+    <div className=' bg-gray-200 relative h-screen overflow-auto'>
     <div>
       <Navbar />
     </div>
