@@ -49,7 +49,7 @@ const CreateJournal = () => {
         id='content'
         value={content}
         onChange={(e) => setContent(e.target.value)}  
-        className="textarea textarea-bordered bg-white border-gray-700 w-full" 
+        className="textarea border text-gray-900 bg-white border-gray-700 w-full" 
         placeholder="Enter Content here ...." />
 
         <button
