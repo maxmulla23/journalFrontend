@@ -82,9 +82,9 @@ const LoginPage = () => {
     >
     Sign In
   </button>
-  {/* <a className="inline-block align-baseline font-bold text-sm text-black hover:text-pink-800" href="#">
-    Forgot Password?
-  </a> */}
+  <a className="inline-block align-baseline font-bold text-sm text-black hover:text-pink-800" href="/register">
+    Are you new?Sign Up
+  </a>
 </div>
 </form>
 <p className="text-center text-gray-500 text-xs">
