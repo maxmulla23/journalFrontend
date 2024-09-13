@@ -1,8 +1,17 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.removeItem("Email")
+    localStorage.removeItem("token")
+    localStorage.removeItem("username")
+    navigate("/")  
+}
   return (
     <div className="navbar bg-pink-900">
   <div className="flex-1">
@@ -25,7 +34,7 @@ const Navbar = () => {
             <span className="badge">New</span>
           </a>
         </li> */}
-        <li><a>Logout</a></li>
+        <li><a onClick={logout}>Logout</a></li>
       </ul>
     </div>
   </div>
