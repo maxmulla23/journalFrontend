@@ -54,7 +54,7 @@ const CreateJournal = () => {
 
         <button
         type='submit' 
-        className="btn btn-ghost bg-pink-50 text-black">Add</button>
+        className="btn btn-ghost mt-4 bg-pink-50 text-black">Add</button>
     </form>
     
     <div className="modal-action">
