@@ -1,7 +1,39 @@
 import { UserCircleIcon } from '@heroicons/react/24/solid'
-import React from 'react'
+import axios from 'axios'
+import React, { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const SignUp = () => {
+  const navigate = useNavigate()
+  const fullname = useRef()
+  const username = useRef()
+  const email = useRef()
+  const password = useRef()
+
+  
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+    const NewUser = {
+    fullname: fullname.current.value,
+    username: username.current.value,
+    email: email.current.value,
+    password: password.current.value,
+  }
+
+  try {
+    const res = await axios.post("http://localhost:5103/api/account/register", NewUser)
+    console.log(res);
+    toast.success("User created successfully! Proceed to login")
+    navigate("/login")
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
   return (
     <div className="relative h-screen overflow-hidden bg-gray-100 dark:bg--100 ">
     <div className="flex justify-center items-center mt-10">
@@ -12,7 +44,7 @@ const SignUp = () => {
     </h2>
       <div className='flex justify-center items-center'>
       <div className="w-full max-w-xs">
-     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
        <div className="mb-4">
          <label className="block text-gray-700 text-sm font-bold mb-2">
            name
@@ -22,7 +54,7 @@ const SignUp = () => {
             id="name"
             type="text"
             placeholder='enter full name...'
-            
+            ref={fullname}
             />
       </div>
       <div className="mb-4">
@@ -34,7 +66,7 @@ const SignUp = () => {
             id="username"
             type="text"
             placeholder='username...'
-            
+            ref={username}
             />
       </div>
       <div className="mb-4">
@@ -46,7 +78,7 @@ const SignUp = () => {
             id="email"
             type="email"
             placeholder='enter email..'
-            
+            ref={email}
             />
       </div>
 <div className="mb-6">
@@ -58,14 +90,14 @@ const SignUp = () => {
     id="password"
     type='password'
     placeholder="Enter Password"
-    
+    ref={password}
     />
   
 </div>
 <div className="flex items-center justify-between">
   <button 
     className="bg-pink-900 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-    type="button"
+    type="submit"
     
     >
     Sign In

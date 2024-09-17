@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
-    <main className="relative h-screen overflow-hidden bg-white dark:bg-pink-100">
+    <main className="relative h-screen overflow-auto bg-white dark:bg-pink-100">
     <header className="z-30 flex items-center w-full h-24 sm:h-32">
         <div className="container flex items-center justify-between px-6 mx-auto">
           <h2 className="font-bold text-gray-800 mt-4 uppercase text-2xl">SoulScript</h2>
